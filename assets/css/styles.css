@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fira Code", sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+input {
+    margin: 20px 0 22px 0;
+    padding: 10px;
+    border: 2px solid #e3e3e3;
+}
+
+label{
+    margin-bottom: -15px;
+}
+.button{
+    padding: 10px;
+    background: #e3e3e3;
+    border: unset;
+    cursor: pointer;
+}
+h1{
+    margin: 20px 0;
+}
+
+.message {
+    margin: -20px 0 6px 0;
+    padding: 0;
+    font-size: 12px;
+    color: red;
+}
