@@ -45,3 +45,9 @@ if ($password != $password_confirm) {
     header('Location: ../register.php');
     $error = true;
 }
+
+if ($error == false) {
+    $query = "INSERT INTO `users` (`id`, `name`, `email`, `password`, `date_reg`) 
+              VALUES (NULL, '$full_name', '$email', '$password', UNIX_TIMESTAMP())";
+    $db->query($query);
+}
