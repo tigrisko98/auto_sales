@@ -2,7 +2,7 @@
 session_start();
 require_once 'connection.php';
 
-class SighUp
+class SignUp
 {
     protected $db;
     protected $full_name;
@@ -13,7 +13,7 @@ class SighUp
 
     public function __construct($post, Connection $connection)
     {
-        $this->db = $connection->getConnection();
+        $this->db = $connection;
         $this->full_name = $post['full_name'];
         $this->email = $post['email'];
         $this->password = $post['password'];
@@ -23,21 +23,22 @@ class SighUp
     public function show()
     {
         try {
-            $result = $this->db->prepare("INSERT INTO users (`name`, `email`, `password`)
-                VALUES (:full_name, :email, :password)");
-            $result->bindParam(':full_name', $this->full_name);
-            $result->bindParam(':email', $this->email);
-            $result->bindParam(':password', $this->password);
-            $result->execute();
+            $db = $this->db->getConnection();
+            $result = $this->db->registration($this->full_name, $this->email, $this->password);
+
+            if ($result) {
+                $lastId = $db->lastInsertId();
+                $row = $this->db->getRecordsById($lastId);
 
                 $_SESSION['user'] =
                     [
-                        'id' => $result['id'],
-                        'name' => $result['name'],
-                        'email' => $result['email'],
-                        'date_reg' => $result['date_reg']
+                        'id' => $row['id'],
+                        'name' => $row['name'],
+                        'email' => $row['email'],
+                        'date_reg' => $row['date_reg']
                     ];
-                header('Location: /auto_sales/vendor/dashboard.php');
+                header('Location: /vendor/dashboard.php');
+            }
 
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -45,7 +46,7 @@ class SighUp
     }
 }
 
-$signUp = new SighUp($_POST, new Connection());
+$signUp = new SignUp($_POST, new Connection());
 $signUp->show();
 
 

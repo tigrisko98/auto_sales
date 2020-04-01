@@ -11,7 +11,7 @@ session_start();
 <body>
 <div class="container">
     <h1>Registration</h1>
-    <form action="/auto_sales/vendor/signup.php" method="post">
+    <form action="/vendor/signup.php" method="post">
         <label>Full name</label>
         <input type="text" name="full_name" placeholder="Input your full name">
         <label>Email</label>
@@ -21,7 +21,7 @@ session_start();
         <label>Confirm password</label>
         <input type="password" name="password_confirm" placeholder="Input your password again">
         <input class="button" type="submit" name="submit" value="Sign up">
-        <p>Already have an account? - <a href="/auto_sales/index.php">Sign in!</a></p>
+        <p>Already have an account? - <a href="/index.php">Sign in!</a></p>
     </form>
 </div>
 </body>

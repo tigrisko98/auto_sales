@@ -10,7 +10,7 @@ class SignIn
 
     public function __construct($post, Connection $connection)
     {
-        $this->db = $connection->getConnection();
+        $this->db = $connection;
         $this->email = $post['email'];
         $this->password = $post['password'];
     }
@@ -18,7 +18,8 @@ class SignIn
     public function show()
     {
         try {
-            $checkUser = $this->db->query("SELECT * FROM `users`
+            $db = $this->db->getConnection();
+            $checkUser = $db->query("SELECT * FROM `users`
                     WHERE `email` = '$this->email' AND `password` = '$this->password'");
             $result = $checkUser->fetch(PDO::FETCH_ASSOC);
 
@@ -30,7 +31,7 @@ class SignIn
                         'email' => $result['email'],
                         'date_reg' => $result['date_reg']
                     ];
-                header('Location: /auto_sales/vendor/dashboard.php');
+                header('Location:/vendor/dashboard.php');
             } else {
                 echo 'Unauthorized user';
             }
