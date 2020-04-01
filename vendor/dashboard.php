@@ -1,8 +1,9 @@
 <?php
 session_start();
 ?>
-<html>
+<html lang="en">
 <head>
+    <title>Dashboard</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
