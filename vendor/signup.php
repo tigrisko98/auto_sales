@@ -36,7 +36,7 @@ class SignUp
         }
     }
 
-    public function validation ($post)
+    public function validate ($post)
     {
         $countErrors = 0;
 
@@ -74,7 +74,7 @@ class SignUp
 }
 
 $signUp = new SignUp(new Connection());
-$signUp->validation($_POST);
+$signUp->validate($_POST);
 
 
 
