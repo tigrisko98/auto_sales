@@ -27,6 +27,7 @@ input {
 label{
     margin-bottom: -15px;
 }
+
 .button{
     padding: 10px;
     background: #e3e3e3;
@@ -38,7 +39,7 @@ h1{
 }
 
 .message {
-    margin: -20px 0 6px 0;
+    margin: -22px 0 6px 0;
     padding: 0;
     font-size: 12px;
     color: red;

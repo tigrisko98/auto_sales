@@ -5,26 +5,17 @@ require_once 'connection.php';
 class SignUp
 {
     protected $db;
-    protected $full_name;
-    protected $email;
-    protected $password;
-    protected $password_confirm;
-    protected $error = false;
 
-    public function __construct($post, Connection $connection)
+    public function __construct(Connection $connection)
     {
         $this->db = $connection;
-        $this->full_name = $post['full_name'];
-        $this->email = $post['email'];
-        $this->password = $post['password'];
-        $this->password_confirm = $post['password_confirm'];
     }
 
-    public function show()
+    public function show($post)
     {
         try {
             $db = $this->db->getConnection();
-            $result = $this->db->registration($this->full_name, $this->email, $this->password);
+            $result = $this->db->registration($post['full_name'], $post['email'], $post['password']);
 
             if ($result) {
                 $lastId = $db->lastInsertId();
@@ -37,17 +28,60 @@ class SignUp
                         'email' => $row['email'],
                         'date_reg' => $row['date_reg']
                     ];
-                header('Location: /vendor/dashboard.php');
+                header('Location: /auto_sales/vendor/dashboard.php');
             }
 
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
+
+    public function validation ($post)
+    {
+        $countErrors = 0;
+
+        if ($post['password'] !== $post['password_confirm'] && !empty($post['password'])){
+            $_SESSION ['password_confirm_error'] = 'Passwords are different';
+            $countErrors++;
+        }
+
+        if (empty($post['full_name'])){
+            $_SESSION ['full_name_error'] = 'Please enter your Full name';
+            $countErrors++;
+        }
+
+        if (empty($post['email'])){
+            $_SESSION ['email_error'] = 'Please enter your Email';
+            $countErrors++;
+        }
+
+        if (empty($post['password'])){
+            $_SESSION ['password_error'] = 'Please enter your Password';
+            $countErrors++;
+        }
+
+        if (empty($post['password_confirm'])){
+            $_SESSION ['password_confirm_error'] = 'Please confirm your Password';
+            $countErrors++;
+        }
+        if ($countErrors > 0){
+            header('Location: ../register.php');
+
+        } else{
+            $this->show($post);
+        }
+    }
 }
 
-$signUp = new SignUp($_POST, new Connection());
-$signUp->show();
+$signUp = new SignUp(new Connection());
+$signUp->validation($_POST);
+
+
+
+
+
+
+
 
 
 
