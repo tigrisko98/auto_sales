@@ -11,7 +11,7 @@ session_start();
 <body>
 <div class="container">
     <h1>Registration</h1>
-    <form action="/auto_sales/vendor/signup.php" method="post" name="signUpForm">
+    <form action="vendor/signup.php" method="post" name="signUpForm">
         <label>Full name</label>
         <input type="text" name="full_name" placeholder="Input your full name">
         <?php
@@ -38,7 +38,7 @@ session_start();
         unset($_SESSION['full_name_error'], $_SESSION['email_error'], $_SESSION['password_error'], $_SESSION['password_confirm_error']);
         ?>
         <input class="button" type="submit" name="submit" value="Sign up">
-        <p>Already have an account? - <a href="/auto_sales/index.php">Sign in!</a></p>
+        <p>Already have an account? - <a href="index.php">Sign in!</a></p>
     </form>
 </div>
 </body>

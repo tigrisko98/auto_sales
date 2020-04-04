@@ -31,7 +31,7 @@ class SignIn
                         'email' => $result['email'],
                         'date_reg' => $result['date_reg']
                     ];
-                header('Location:/auto_sales/vendor/dashboard.php');
+                header('Location: dashboard.php');
             } else {
                 echo 'Unauthorized user';
             }
