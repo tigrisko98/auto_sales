@@ -30,4 +30,11 @@ class Connection implements connectionInterface
         $result->bindParam(':password', $password);
         return $result->execute();
     }
+
+    public function checkUser($email, $password) {
+        $checkUser = $this->db->query("SELECT * FROM `users`
+                    WHERE `email` = '$email' AND `password` = '$password'");
+        return $result = $checkUser->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

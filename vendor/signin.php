@@ -5,23 +5,19 @@ require_once 'connection.php';
 class SignIn
 {
     protected $db;
-    protected $email;
-    protected $password;
 
-    public function __construct($post, Connection $connection)
+
+    public function __construct(Connection $connection)
     {
         $this->db = $connection;
-        $this->email = $post['email'];
-        $this->password = $post['password'];
+
     }
 
-    public function show()
+    public function show($post)
     {
         try {
-            $db = $this->db->getConnection();
-            $checkUser = $db->query("SELECT * FROM `users`
-                    WHERE `email` = '$this->email' AND `password` = '$this->password'");
-            $result = $checkUser->fetch(PDO::FETCH_ASSOC);
+            $this->db->getConnection();
+            $result = $this->db->checkUser($post['email'], $post['password']);
 
             if ($result) {
                 $_SESSION['user'] =
@@ -33,13 +29,35 @@ class SignIn
                     ];
                 header('Location: dashboard.php');
             } else {
-                echo 'Unauthorized user';
+               echo 'Unauthorized user';
+
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
+
+    public function validate($post)
+    {
+        $countErrors = 0;
+
+        if (empty($post['email'])){
+            $_SESSION ['email_error'] = 'Please enter your Email';
+            $countErrors++;
+        }
+
+        if (empty($post['password'])){
+            $_SESSION ['password_error'] = 'Please enter your Password';
+            $countErrors++;
+        }
+        if ($countErrors > 0){
+            header('Location: ../index.php');
+
+        } else{
+            $this->show($post);
+        }
+    }
 }
 
-$signIn = new SignIn($_POST, new Connection());
-$signIn->show();
+$signIn = new SignIn(new Connection());
+$signIn->validate($_POST);
