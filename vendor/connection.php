@@ -31,10 +31,33 @@ class Connection implements connectionInterface
         return $result->execute();
     }
 
-    public function checkUser($email, $password) {
+    public function checkUser($email, $password)
+    {
         $checkUser = $this->db->query("SELECT * FROM `users`
                     WHERE `email` = '$email' AND `password` = '$password'");
         return $result = $checkUser->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function createAd($brand, $model, $price, $year, $mileage, $engine_capacity, $fuel, $gearbox, $drive,
+                             $colour, $description) :bool
+    {
+        $createAd = $this->db->prepare("INSERT INTO `vehicles`(`brand`, `model`, `price`, `year`, 
+                                       `mileage`, `engine_capacity`, `fuel`, `gearbox`, `drive`, `color`, `description`) 
+                                       VALUES (:brand, :model, :price, :year, :mileage, :engine_capacity, :fuel, :gearbox,
+                                               :drive, :colour, :description)");
+        $createAd->bindParam(':brand', $brand);
+        $createAd->bindParam(':model', $model);
+        $createAd->bindParam(':price', $price);
+        $createAd->bindParam(':year', $year);
+        $createAd->bindParam(':mileage', $mileage);
+        $createAd->bindParam(':engine_capacity', $engine_capacity);
+        $createAd->bindParam(':fuel', $fuel);
+        $createAd->bindParam(':gearbox', $gearbox);
+        $createAd->bindParam(':drive', $drive);
+        $createAd->bindParam(':colour', $colour);
+        $createAd->bindParam(':description', $description);
+
+        return $createAd->execute();
     }
 
 }

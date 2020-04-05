@@ -18,7 +18,7 @@ form {
     width: 400px;
 }
 
-input {
+input, select{
     margin: 20px 0 22px 0;
     padding: 10px;
     border: 2px solid #e3e3e3;

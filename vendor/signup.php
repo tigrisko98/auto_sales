@@ -28,7 +28,7 @@ class SignUp
                         'email' => $row['email'],
                         'date_reg' => $row['date_reg']
                     ];
-                header('Location: /auto_sales/vendor/dashboard.php');
+                header('Location:dashboard.php');
             }
 
         } catch (PDOException $e) {

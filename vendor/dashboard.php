@@ -8,7 +8,11 @@ session_start();
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-<a href="logout.php">Log out</a>
+<header>
+    <a href="#">View all ads</a>
+    <a href="createVehicle.php">Post an ad</a>
+    <a href="logout.php">Log out</a>
+</header>
 </body>
 
 </html>
