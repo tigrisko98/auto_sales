@@ -9,6 +9,7 @@ class vehicle
     const FUEL = ['Gas', 'Petrol', 'Gas/Petrol', 'Hybrid', 'Electric'];
     const GEARBOX = ['Manual', 'Manual-4', 'Manual-5', 'Manual-6', 'Automatic', 'Manumatic', 'Semi-tronic',
         'Semi-automatic', 'Variator'];
+    const DRIVE = ['FWD', 'RWD', 'AWD'];
 
     public function __construct(Connection $connection)
     {
@@ -20,8 +21,44 @@ class vehicle
         return self::YEAR;
     }
 
+    public function getFuel()
+    {
+        return self::FUEL;
+    }
+
+    public function getGearbox()
+    {
+        return self::GEARBOX;
+    }
+
+    public function getDrive()
+    {
+        return self::DRIVE;
+    }
+
+    public function show($post)
+    {
+        try {
+            $db = $this->db->getConnection();
+            $result = $this->db->createAd($post['brand'], $post['model'], $post['price'], $post['year[]'], $post['mileage'],
+                $post['engine_capacity'], $post['fuel[]'], $post['gearbox[]'], $post['drive[]'],
+                $post['colour'], $post['description']);
+
+            if ($result) {
+                echo 'Your Ad posted successfully!';
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 }
 
 $car = new vehicle(new Connection());
 $years = $car->getYear();
+$fuels = $car->getFuel();
+$gearboxes = $car->getGearbox();
+$drives = $car->getDrive();
 
+if (isset($_POST['postAd']))
+$car->show($_POST);

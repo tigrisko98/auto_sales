@@ -18,13 +18,13 @@ form {
     width: 400px;
 }
 
-input, select{
+input, select, textarea{
     margin: 20px 0 22px 0;
     padding: 10px;
     border: 2px solid #e3e3e3;
 }
 
-label{
+label {
     margin-bottom: -15px;
 }
 
