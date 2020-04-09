@@ -19,7 +19,7 @@ require_once 'vehicle.php';
         <label>Price in $</label>
         <input type="text" name="price" placeholder="For example: 5000$">
         <label>Year of manufacture</label>
-        <select name="year[]">
+        <select name="year">
             <option value="" selected disabled hidden>Choose your Year of manufacture</option>
             <?php
             foreach ($years as $year) {
@@ -32,7 +32,7 @@ require_once 'vehicle.php';
         <label>Engine Capacity</label>
         <input type="text" name="engine_capacity" placeholder="For example: 1600">
         <label>Fuel</label>
-        <select name="fuel[]">
+        <select name="fuel">
             <option value="" selected disabled hidden>Choose your Fuel</option>
             <?php
             foreach ($fuels as $fuel) {
@@ -41,7 +41,7 @@ require_once 'vehicle.php';
             ?>
         </select>
         <label>Gearbox</label>
-        <select name="gearbox[]">
+        <select name="gearbox">
             <option value="" selected disabled hidden>Choose your Gearbox</option>
             <?php
             foreach ($gearboxes as $gearbox) {
@@ -50,7 +50,7 @@ require_once 'vehicle.php';
             ?>
         </select>
         <label>Drive</label>
-        <select name="drive[]">
+        <select name="drive">
             <option value="" selected disabled hidden>Choose your Drive</option>
             <?php
             foreach ($drives as $drive) {

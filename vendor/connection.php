@@ -39,7 +39,7 @@ class Connection implements connectionInterface
     }
 
     public function createAd($brand, $model, $price, $year, $mileage, $engine_capacity, $fuel, $gearbox, $drive,
-                             $colour, $description) :bool
+                             $colour, $description): bool
     {
         $createAd = $this->db->prepare("INSERT INTO `vehicles`(`brand`, `model`, `price`, `year`, 
                                        `mileage`, `engine_capacity`, `fuel`, `gearbox`, `drive`, `color`, `description`) 
