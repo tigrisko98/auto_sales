@@ -13,49 +13,45 @@ class SignIn
 
     }
 
-    public function show($post)
+    public function show($result)
     {
-        try {
-            $this->db->getConnection();
-            $result = $this->db->checkUser($post['email'], $post['password']);
-
-            if ($result) {
-                $_SESSION['user'] =
-                    [
-                        'id' => $result['id'],
-                        'name' => $result['name'],
-                        'email' => $result['email'],
-                        'date_reg' => $result['date_reg']
-                    ];
-                header('Location: dashboard.php');
-            } else {
-               echo 'Unauthorized user';
-
-            }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        $_SESSION['user'] =
+            [
+                'id' => $result['id'],
+                'name' => $result['name'],
+                'email' => $result['email'],
+                'date_reg' => $result['date_reg']
+            ];
+        header('Location: dashboard.php');
     }
 
     public function validate($post)
     {
         $countErrors = 0;
 
-        if (empty($post['email'])){
+        if (empty($post['email'])) {
             $_SESSION ['email_error'] = 'Please enter your Email';
             $countErrors++;
         }
 
-        if (empty($post['password'])){
+        if (empty($post['password'])) {
             $_SESSION ['password_error'] = 'Please enter your Password';
             $countErrors++;
         }
-        if ($countErrors > 0){
-            header('Location: ../index.php');
 
-        } else{
-            $this->show($post);
+        if ($countErrors == 0) {
+            $this->db->getConnection();
+            $result = $this->db->checkUser($post['email'], $post['password']);
+            if ($result) {
+                $this->show($result);
+            } else {
+                $_SESSION['email_password_error'] = 'Incorrect Email or Password';
+                header('Location: ../index.php');
+            }
+        } else {
+            header('Location: ../index.php');
         }
+
     }
 }
 
