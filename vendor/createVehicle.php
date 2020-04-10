@@ -69,8 +69,6 @@ require_once 'vehicle.php';
         <input type="submit" name="postAd" value="Post an Ad on AUTO_SALES" class="button">
     </form>
 </div>
-
-
 </body>
 
 </html>
