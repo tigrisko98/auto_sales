@@ -14,6 +14,5 @@ session_start();
     <a href="logout.php">Log out</a>
 </header>
 </body>
-
 </html>
 

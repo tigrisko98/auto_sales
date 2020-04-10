@@ -59,5 +59,4 @@ class Connection implements connectionInterface
 
         return $createAd->execute();
     }
-
 }

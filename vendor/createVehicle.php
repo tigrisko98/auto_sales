@@ -9,6 +9,10 @@ require_once 'vehicle.php';
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
+<header class="navigation">
+    <a href="dashboard.php">Dashboard</a>
+    <a href="logout.php">Log out</a>
+</header>
 <div class="container">
     <h1>Submit a Vehicle Advertisement</h1>
     <form action="vehicle.php" method="post">
@@ -62,7 +66,7 @@ require_once 'vehicle.php';
         <input type="text" name="colour" placeholder="For example: green">
         <label>Description</label>
         <textarea name="description" placeholder="Input some additional information about your Vehicle"></textarea>
-        <input type="submit" name="postAd" value="Post an Ad on AUTO_SALES">
+        <input type="submit" name="postAd" value="Post an Ad on AUTO_SALES" class="button">
     </form>
 </div>
 

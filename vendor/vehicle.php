@@ -39,12 +39,10 @@ class vehicle
     public function show($post)
     {
         try {
-            $db = $this->db->getConnection();
+            $this->db->getConnection();
             $result = $this->db->createAd($post['brand'], $post['model'], $post['price'], $post['year'], $post['mileage'],
                 $post['engine_capacity'], $post['fuel'], $post['gearbox'], $post['drive'],
                 $post['colour'], $post['description']);
-            var_dump($result);
-            var_dump($post);
             if ($result) {
                 echo 'Your Ad posted successfully!';
             }
