@@ -30,7 +30,7 @@ class SignIn
         $countErrors = 0;
 
         if (empty($post['email'])) {
-            $_SESSION ['email_error'] = 'Please enter your Email';
+            $_SESSION ['email_error'] = 'Please enter your E-mail';
             $countErrors++;
         }
 
@@ -45,7 +45,7 @@ class SignIn
             if ($result) {
                 $this->show($result);
             } else {
-                $_SESSION['email_password_error'] = 'Incorrect Email or Password';
+                $_SESSION['email_password_error'] = 'Incorrect E-mail or Password';
                 header('Location: ../index.php');
             }
         } else {
