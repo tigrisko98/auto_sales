@@ -59,4 +59,18 @@ class Connection implements connectionInterface
 
         return $createAd->execute();
     }
+
+    public function fieldsData()
+    {
+        $fieldsData = $this->db->query("SELECT * FROM `vehicles`");
+        return $result = $fieldsData->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function searchAd($brand = null, $model = null, $yearFrom = null, $yearTo = null, $priceFrom = null, $priceTo = null)
+    {
+        $searchAd = $this->db->query("SELECT * FROM `vehicles`
+                    WHERE `brand` = '$brand' AND `model` = '$model' AND `year` BETWEEN '$yearFrom' AND '$yearTo' 
+                    AND `price` BETWEEN '$priceFrom' AND '$priceTo'");
+        return $result = $searchAd->fetch(PDO::FETCH_ASSOC);
+    }
 }

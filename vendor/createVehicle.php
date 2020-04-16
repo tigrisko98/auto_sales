@@ -26,7 +26,7 @@ require_once 'vehicle.php';
         <select name="year">
             <option value="" selected disabled hidden>Choose your Year of manufacture</option>
             <?php
-            foreach ($years as $year) {
+            foreach ($years as $year){
                 echo '<option value="' . $year . '">' . $year . '</option>';
             }
             ?>

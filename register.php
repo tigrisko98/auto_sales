@@ -55,7 +55,7 @@ session_start();
                 ?>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default" name="submit" value="Sign up">
-                    <p class="info">Already have an account? - <a href="index.php">Sign in!</a></p>
+                    <p class="info">Already have an account? - <a href="index.php">Sign In!</a></p>
                 </div>
             </form>
         </div>

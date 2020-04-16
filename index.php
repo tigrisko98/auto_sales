@@ -40,7 +40,7 @@ session_start();
                 ?>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default" name="submit" value="Login">
-                    <p class="info">Don't have an account? - <a href="register.php">Sign up!</a></p>
+                    <p class="info">Don't have an account? - <a href="register.php">Sign Up!</a></p>
                 </div>
         </div>
         </form>
