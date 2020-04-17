@@ -5,6 +5,8 @@ class vehicle
 {
     protected $db;
     protected $years;
+    const PRICE = [200, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000, 7000, 8000, 9000, 10000, 11000,
+        12500, 14000, 15000, 17500, 20000, 22500, 25000, 27500, 30000, 35000, 40000, 45000, 50000, 60000, 75000, 100000];
     const FUEL = ['Gas', 'Petrol', 'Gas/Petrol', 'Hybrid', 'Electric'];
     const GEARBOX = ['Manual', 'Manual-4', 'Manual-5', 'Manual-6', 'Automatic', 'Manumatic', 'Semi-tronic',
         'Semi-automatic', 'Variator'];
@@ -19,6 +21,11 @@ class vehicle
     {
         $this->years = range(1921, 2020);
         return $this->years;
+    }
+
+    public function getPrice()
+    {
+        return self::PRICE;
     }
 
     public function getFuel()
@@ -51,14 +58,33 @@ class vehicle
         }
 
     }
+
+    public function showAds($post)
+    {
+        try {
+            $this->db->getConnection();
+            $result = $this->db->searchAd($post['brand'], $post['model'], $post['yearFrom'], $post['yearTo'],
+                $post['priceFrom'], $post['priceTo']);
+            if ($result) {
+                print_r($result);
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 $car = new vehicle(new Connection());
 $years = $car->getYears();
+$prices = $car->getPrice();
 $fuels = $car->getFuel();
 $gearboxes = $car->getGearbox();
 $drives = $car->getDrive();
 
 if (isset($_POST['postAd'])) {
     $car->show($_POST);
+}
+
+if (isset($_POST['search'])) {
+    $car->showAds($_POST);
 }

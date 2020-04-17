@@ -77,9 +77,19 @@ $fields = $connection->fieldsData();
             <label>Price</label>
             <select name="priceFrom">
                 <option>from</option>
+                <?php
+                foreach ($prices as $price){
+                    echo '<option value="' . $price . '">' . $price . '</option>';
+                }
+                ?>
             </select>
             <select name="priceTo">
                 <option>to</option>
+                <?php
+                foreach ($prices as $price){
+                    echo '<option value="' . $price . '">' . $price . '</option>';
+                }
+                ?>
             </select>
             <input type="submit" name="search" value="Search on Auto Sales">
         </form>
