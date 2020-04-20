@@ -70,5 +70,4 @@ require_once 'vehicle.php';
     </form>
 </div>
 </body>
-
 </html>

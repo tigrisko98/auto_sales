@@ -104,7 +104,7 @@ class Connection implements connectionInterface
         }
         if ($brand == '- all brands -' && $model == '- all models -' && $yearFrom == 'from' && $priceFrom != 'from'
             && $yearTo == 'to' && $priceTo != 'to') {
-            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `year` BETWEEN '$priceFrom' AND '$priceTo'");
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `price` BETWEEN '$priceFrom' AND '$priceTo'");
         }
 
 
