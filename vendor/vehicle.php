@@ -63,15 +63,15 @@ class vehicle
     {
         try {
             $this->db->getConnection();
-            $result = $this->db->searchAd($post['brand'], $post['model'], $post['yearFrom'], $post['yearTo'],
+           $result = $this->db->searchAd($post['brand'], $post['model'], $post['yearFrom'], $post['yearTo'],
                 $post['priceFrom'], $post['priceTo']);
-            if ($result) {
-                print_r($result);
-            }
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+        return $result;
     }
+
 }
 
 $car = new vehicle(new Connection());

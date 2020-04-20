@@ -43,8 +43,12 @@ $fields = $connection->fieldsData();
             <select name="brand">
                 <option> - all brands -</option>
                 <?php
-                foreach ($fields as $brand) {
-                    echo '<option value="' . $brand['brand'] . '">' . $brand['brand'] . '</option>';
+                foreach ($fields as $key => $value) {
+                    foreach ($value as $k => $v) {
+                        if ($k == 'brand') {
+                            echo '<option value="' . $v . '">' . $v . '</option>';
+                        }
+                    }
                 }
                 ?>
             </select>
@@ -61,7 +65,7 @@ $fields = $connection->fieldsData();
             <select name="yearFrom">
                 <option>from</option>
                 <?php
-                foreach ($years as $year){
+                foreach ($years as $year) {
                     echo '<option value="' . $year . '">' . $year . '</option>';
                 }
                 ?>
@@ -69,7 +73,7 @@ $fields = $connection->fieldsData();
             <select name="yearTo">
                 <option>to</option>
                 <?php
-                foreach ($years as $year){
+                foreach ($years as $year) {
                     echo '<option value="' . $year . '">' . $year . '</option>';
                 }
                 ?>
@@ -78,7 +82,7 @@ $fields = $connection->fieldsData();
             <select name="priceFrom">
                 <option>from</option>
                 <?php
-                foreach ($prices as $price){
+                foreach ($prices as $price) {
                     echo '<option value="' . $price . '">' . $price . '</option>';
                 }
                 ?>
@@ -86,13 +90,67 @@ $fields = $connection->fieldsData();
             <select name="priceTo">
                 <option>to</option>
                 <?php
-                foreach ($prices as $price){
+                foreach ($prices as $price) {
                     echo '<option value="' . $price . '">' . $price . '</option>';
                 }
                 ?>
             </select>
             <input type="submit" name="search" value="Search on Auto Sales">
         </form>
+        <?php
+        if (isset($_POST['search'])) {
+            $data = $connection->searchAd($_POST['brand'], $_POST['model'], $_POST['yearFrom'], $_POST['yearTo'],
+                $_POST['priceFrom'], $_POST['priceTo']);
+            ?>
+            <table>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Year</th>
+                    <th>Mileage</th>
+                    <th>Engine Capacity</th>
+                    <th>Fuel</th>
+                    <th>Gearbox</th>
+                    <th>Drive</th>
+                    <th>Colour</th>
+                    <th>Description</th>
+                </tr>
+                <?php
+                foreach ($data as $value) {
+                    ?>
+                    <tr><?php
+                    foreach ($value as $k => $v) {
+                        if ($k == 'brand')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'model')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'price')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'year')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'mileage')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'engine_capacity')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'fuel')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'gearbox')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'drive')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'color')
+                            echo '<td>' . "$v" . '</td>';
+                        if ($k == 'description')
+                            echo '<td>' . "$v" . '</td>';
+                    }
+                    ?></tr><?php
+                }
+                ?>
+            </table>
+            <?
+        }
+        ?>
     </div>
 </main>
 </body>

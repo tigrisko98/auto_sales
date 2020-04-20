@@ -73,16 +73,40 @@ class Connection implements connectionInterface
                     WHERE `brand` = '$brand' AND `model` = '$model' AND `year` BETWEEN '$yearFrom' AND '$yearTo' 
                     AND `price` BETWEEN '$priceFrom' AND '$priceTo'");
         }
-
-        if ($brand || !$model || !$yearFrom || !$yearTo || !$priceFrom || !$priceTo) {
+        if ($brand != '- all brands -' && $model == '- all models -' && ($yearFrom && $priceFrom) == 'from' &&
+            ($yearTo && $priceTo) == 'to') {
             $searchAd = $this->db->query("SELECT * FROM `vehicles`
                     WHERE `brand` = '$brand'");
         }
-
         if ($brand == '- all brands -' && $model == '- all models -' && ($yearFrom && $priceFrom) == 'from' &&
             ($yearTo && $priceTo) == 'to') {
             $searchAd = $this->db->query("SELECT * FROM `vehicles`");
         }
+        if ($brand == '- all brands -' && $model == '- all models -' && $yearFrom != 'from' && $priceFrom == 'from'
+            && ($yearTo && $priceTo) == 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `year` BETWEEN '$yearFrom' AND '2020'");
+        }
+        if ($brand == '- all brands -' && $model == '- all models -' && ($yearFrom && $priceFrom) == 'from'
+            && $yearTo != 'to' && $priceTo == 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `year` BETWEEN '1921' AND '$yearTo'");
+        }
+        if ($brand == '- all brands -' && $model == '- all models -' && $yearFrom != 'from' && $priceFrom == 'from'
+            && $yearTo != 'to' && $priceTo == 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `year` BETWEEN '$yearFrom' AND '$yearTo'");
+        }
+        if ($brand == '- all brands -' && $model == '- all models -' && $yearFrom == 'from' && $priceFrom != 'from'
+            && ($yearTo && $priceTo) == 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `price` BETWEEN '$priceFrom' AND '100000'");
+        }
+        if ($brand == '- all brands -' && $model == '- all models -' && ($yearFrom && $priceFrom) == 'from'
+            && $yearTo == 'to' && $priceTo != 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `price` BETWEEN '200' AND '$priceTo'");
+        }
+        if ($brand == '- all brands -' && $model == '- all models -' && $yearFrom == 'from' && $priceFrom != 'from'
+            && $yearTo == 'to' && $priceTo != 'to') {
+            $searchAd = $this->db->query("SELECT * FROM `vehicles` WHERE `year` BETWEEN '$priceFrom' AND '$priceTo'");
+        }
+
 
         return $result = $searchAd->fetchAll(PDO::FETCH_ASSOC);
     }
