@@ -43,12 +43,12 @@ $fields = $connection->fieldsData();
             <select name="brand">
                 <option> - all brands -</option>
                 <?php
-                foreach ($fields as $key => $value) {
-                    foreach ($value as $k => $v) {
-                        if ($k == 'brand') {
-                            echo '<option value="' . $v . '">' . $v . '</option>';
-                        }
-                    }
+                foreach ($fields as $value) {
+                    $arr [] = $value['brand'];
+                    sort($arr);
+                }
+                for ($i = 0; $i < count(array_unique($arr)); $i++) {
+                    echo '<option value="' . $arr[$i] . '">' . $arr[$i] . '</option>';
                 }
                 ?>
             </select>
@@ -148,11 +148,10 @@ $fields = $connection->fieldsData();
                 }
                 ?>
             </table>
-            <?
+            <?php
         }
         ?>
     </div>
 </main>
 </body>
 </html>
-
